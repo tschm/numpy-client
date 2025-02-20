@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>numpy-client &#8212; numpy-flight</title>
+    <title>Numpy with Apache Arrow Flight &#8212; numpy-client</title>
   
   
   
@@ -144,7 +144,7 @@
   
   
   
-    <p class="title logo__title">numpy-flight</p>
+    <p class="title logo__title">numpy-client</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -160,7 +160,7 @@
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    numpy-client
+                    Numpy with Apache Arrow Flight
                 </a>
             </li>
         </ul>
@@ -227,7 +227,7 @@
       
       
       
-      <li><a href="https://github.com/tschm/numpy-flight" target="_blank"
+      <li><a href="https://github.com/tschm/numpy-client" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -244,7 +244,7 @@
       
       
       
-      <li><a href="https://github.com/tschm/numpy-flight/issues/new?title=Issue%20on%20page%20%2Fdocs/index.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/tschm/numpy-client/issues/new?title=Issue%20on%20page%20%2Fdocs/index.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -350,7 +350,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>numpy-client</h1>
+    <h1>Numpy with Apache Arrow Flight</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -360,15 +360,32 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-environment"><strong>Set Up Environment</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-pre-commit-hooks"><strong>Configure Pre-commit Hooks</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-project-info"><strong>Update Project Info</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-problem">A Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-setup">Basic Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sending-data">Sending Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-data">Retrieving Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-with-data">Computing with Data</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development-commands">Development Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference">API Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#client"><code class="docutils literal notranslate"><span class="pre">Client</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#init-client-fl-flightclient"><code class="docutils literal notranslate"><span class="pre">__init__(client:</span> <span class="pre">fl.FlightClient)</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#write-command-str-data-dict-str-np-ndarray"><code class="docutils literal notranslate"><span class="pre">write(command:</span> <span class="pre">str,</span> <span class="pre">data:</span> <span class="pre">Dict[str,</span> <span class="pre">np.ndarray])</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-command-str-pa-table"><code class="docutils literal notranslate"><span class="pre">get(command:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">pa.Table</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-command-str-data-dict-str-np-ndarray-dict-str-np-ndarray"><code class="docutils literal notranslate"><span class="pre">compute(command:</span> <span class="pre">str,</span> <span class="pre">data:</span> <span class="pre">Dict[str,</span> <span class="pre">np.ndarray])</span> <span class="pre">-&gt;</span> <span class="pre">Dict[str,</span> <span class="pre">np.ndarray]</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">Error Handling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-environment"><strong>Set Up Environment</strong></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trusted-publishing-failure">Trusted publishing failure</a></li>
 </ul>
             </nav>
         </div>
@@ -380,16 +397,154 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="numpy-client">
-<h1><a class="reference external" href="https://tschm.github.io/numpy-client/book">numpy-client</a><a class="headerlink" href="#numpy-client" title="Link to this heading">#</a></h1>
-<p><a class="reference external" href="https://badge.fury.io/py/numpy-client"><img alt="PyPI version" src="https://badge.fury.io/py/numpy-client.svg" /></a>
+  <section class="tex2jax_ignore mathjax_ignore" id="numpy-with-apache-arrow-flight">
+<h1><a class="reference external" href="https://tschm.github.io/numpy-flight/book">Numpy with Apache Arrow Flight</a><a class="headerlink" href="#numpy-with-apache-arrow-flight" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://badge.fury.io/py/numpy-flight"><img alt="PyPI version" src="https://badge.fury.io/py/numpy-flight.svg" /></a>
 <a class="reference internal" href="#LICENSE.txt"><span class="xref myst"><img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" /></span></a>
-<a class="reference external" href="https://github.com/tschm/numpy-client/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/tschm/numpy-client/actions/workflows/ci.yml/badge.svg" /></a>
-<a class="reference external" href="https://coveralls.io/github/tschm/numpy-client?branch=main"><img alt="Coverage Status" src="https://coveralls.io/repos/github/tschm/numpy-client/badge.svg?branch=main" /></a>
+<a class="reference external" href="https://github.com/tschm/numpy-flight/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/tschm/numpy-flight/actions/workflows/ci.yml/badge.svg" /></a>
+<a class="reference external" href="https://coveralls.io/github/tschm/numpy-flight?branch=main"><img alt="Coverage Status" src="https://coveralls.io/repos/github/tschm/numpy-flight/badge.svg?branch=main" /></a>
 <a class="reference external" href="https://github.com/tschm/package"><img alt="Created with qCradle" src="https://img.shields.io/badge/Created%20with-qCradle-blue?style=flat-square" /></a></p>
-<p><a class="reference external" href="https://codespaces.new/tschm/numpy-client"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
-<section id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://codespaces.new/tschm/numpy-flight"><img alt="Open in GitHub Codespaces" src="https://github.com/codespaces/badge.svg" /></a></p>
+<section id="a-problem">
+<h2>A Problem<a class="headerlink" href="#a-problem" title="Link to this heading">#</a></h2>
+<p>We provide</p>
+<ul class="simple">
+<li><p>An abstract base class for an Apache flight server</p></li>
+<li><p>A client class to communicate with such servers</p></li>
+</ul>
+<p>We efficiently transfer NumPy arrays over Apache Arrow Flight using a custom Client.
+The client provides a simple interface for sending NumPy arrays,
+performing computations, and retrieving results, all while handling
+the serialization and deserialization automatically in the background.</p>
+<p>To create a server we expect the user to overload a function performing
+the calcutation based on a dictionary of numpy arrays.</p>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Seamless conversion between NumPy arrays and Arrow Tables</p></li>
+<li><p>Simple interface for data transfer operations</p></li>
+<li><p>Support for batch computations</p></li>
+<li><p>Automatic resource management</p></li>
+<li><p>Type-safe operations with proper error handling</p></li>
+</ul>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>You can install this client via</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>numpy-flight
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
+<section id="basic-setup">
+<h3>Basic Setup<a class="headerlink" href="#basic-setup" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyarrow.flight</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">fl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">np.flight</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
+
+<span class="c1"># Initialize the Flight client</span>
+<span class="n">flight_client</span> <span class="o">=</span> <span class="n">fl</span><span class="o">.</span><span class="n">FlightClient</span><span class="p">(</span><span class="s1">&#39;grpc://localhost:8815&#39;</span><span class="p">)</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">flight_client</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="sending-data">
+<h3>Sending Data<a class="headerlink" href="#sending-data" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prepare your NumPy arrays</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>
+    <span class="s1">&#39;labels&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">])</span>
+<span class="p">}</span>
+
+<span class="c1"># Send data to the server</span>
+<span class="n">client</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;store_data&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="retrieving-data">
+<h3>Retrieving Data<a class="headerlink" href="#retrieving-data" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get data from the server</span>
+<span class="n">result_table</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;retrieve_data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="computing-with-data">
+<h3>Computing with Data<a class="headerlink" href="#computing-with-data" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Send data and get results in one operation</span>
+<span class="n">input_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]),</span>
+    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="p">}</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="s1">&#39;multiply_arrays&#39;</span><span class="p">,</span> <span class="n">input_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h2>
+<section id="client">
+<h3><code class="docutils literal notranslate"><span class="pre">Client</span></code><a class="headerlink" href="#client" title="Link to this heading">#</a></h3>
+<section id="init-client-fl-flightclient">
+<h4><code class="docutils literal notranslate"><span class="pre">__init__(client:</span> <span class="pre">fl.FlightClient)</span></code><a class="headerlink" href="#init-client-fl-flightclient" title="Link to this heading">#</a></h4>
+<p>Initialize the client with a Flight client instance.</p>
+</section>
+<section id="write-command-str-data-dict-str-np-ndarray">
+<h4><code class="docutils literal notranslate"><span class="pre">write(command:</span> <span class="pre">str,</span> <span class="pre">data:</span> <span class="pre">Dict[str,</span> <span class="pre">np.ndarray])</span></code><a class="headerlink" href="#write-command-str-data-dict-str-np-ndarray" title="Link to this heading">#</a></h4>
+<p>Write NumPy arrays to the Flight server.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">command</span></code>: String identifying the operation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>: Dictionary mapping column names to NumPy arrays</p></li>
+</ul>
+</section>
+<section id="get-command-str-pa-table">
+<h4><code class="docutils literal notranslate"><span class="pre">get(command:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">pa.Table</span></code><a class="headerlink" href="#get-command-str-pa-table" title="Link to this heading">#</a></h4>
+<p>Retrieve data from the Flight server.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">command</span></code>: String identifying the data to retrieve</p></li>
+<li><p>Returns: PyArrow Table containing the retrieved data</p></li>
+</ul>
+</section>
+<section id="compute-command-str-data-dict-str-np-ndarray-dict-str-np-ndarray">
+<h4><code class="docutils literal notranslate"><span class="pre">compute(command:</span> <span class="pre">str,</span> <span class="pre">data:</span> <span class="pre">Dict[str,</span> <span class="pre">np.ndarray])</span> <span class="pre">-&gt;</span> <span class="pre">Dict[str,</span> <span class="pre">np.ndarray]</span></code><a class="headerlink" href="#compute-command-str-data-dict-str-np-ndarray-dict-str-np-ndarray" title="Link to this heading">#</a></h4>
+<p>Perform a computation on the server and retrieve results.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">command</span></code>: String identifying the computation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code>: Input data as dictionary of NumPy arrays</p></li>
+<li><p>Returns: Dictionary of NumPy arrays containing results</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Link to this heading">#</a></h2>
+<p>The client includes proper error handling for common scenarios:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FlightError</span></code>: Raised for Flight protocol communication errors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ValueError</span></code>: Raised for data conversion errors</p></li>
+<li><p>Resource cleanup is handled automatically, even in error cases</p></li>
+</ul>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Always close the Flight client when done:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">client</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Use context managers when possible to ensure proper cleanup:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">flight</span><span class="o">.</span><span class="n">FlightClient</span><span class="p">(</span><span class="s1">&#39;grpc://localhost:8815&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">flight_client</span><span class="p">:</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="n">flight_client</span><span class="p">)</span>
+    <span class="c1"># ... perform operations</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Handle large datasets in chunks to manage memory usage effectively.</p></li>
+</ul>
 <section id="set-up-environment">
 <h3><strong>Set Up Environment</strong><a class="headerlink" href="#set-up-environment" title="Link to this heading">#</a></h3>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>install
@@ -403,27 +558,6 @@ uv<span class="w"> </span>add/remove<span class="w"> </span>requests<span class=
 </pre></div>
 </div>
 </section>
-<section id="configure-pre-commit-hooks">
-<h3><strong>Configure Pre-commit Hooks</strong><a class="headerlink" href="#configure-pre-commit-hooks" title="Link to this heading">#</a></h3>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>fmt
-</pre></div>
-</div>
-<p>Installs hooks to maintain code quality and formatting.</p>
-</section>
-<section id="update-project-info">
-<h3><strong>Update Project Info</strong><a class="headerlink" href="#update-project-info" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Edit <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> to update authors and email addresses</p></li>
-<li><p>Configure GitHub Pages (branch: gh-pages) in repository settings</p></li>
-</ul>
-</section>
-</section>
-<section id="development-commands">
-<h2>Development Commands<a class="headerlink" href="#development-commands" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>tests<span class="w">   </span><span class="c1"># Run test suite</span>
-make<span class="w"> </span>marimo<span class="w">  </span><span class="c1"># Start Marimo notebooks</span>
-</pre></div>
-</div>
 </section>
 <section id="contributing">
 <h2>Contributing<a class="headerlink" href="#contributing" title="Link to this heading">#</a></h2>
@@ -434,32 +568,6 @@ make<span class="w"> </span>marimo<span class="w">  </span><span class="c1"># St
 <li><p>Push to the branch (git push origin feature/amazing-feature)</p></li>
 <li><p>Open a Pull Request</p></li>
 </ul>
-</section>
-<section id="trusted-publishing-failure">
-<h2>Trusted publishing failure<a class="headerlink" href="#trusted-publishing-failure" title="Link to this heading">#</a></h2>
-<p>That’s good news!</p>
-<p>You are not able to publish to PyPI unless you have registered your project
-on PyPI. You get the following message:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Trusted<span class="w"> </span>publishing<span class="w"> </span>exchange<span class="w"> </span>failure:
-
-Token<span class="w"> </span>request<span class="w"> </span>failed:<span class="w"> </span>the<span class="w"> </span>server<span class="w"> </span>refused<span class="w"> </span>the<span class="w"> </span>request<span class="w"> </span><span class="k">for</span>
-the<span class="w"> </span>following<span class="w"> </span>reasons:
-
-invalid-publisher:<span class="w"> </span>valid<span class="w"> </span>token,<span class="w"> </span>but<span class="w"> </span>no<span class="w"> </span>corresponding
-publisher<span class="w"> </span><span class="o">(</span>All<span class="w"> </span>lookup<span class="w"> </span>strategies<span class="w"> </span>exhausted<span class="o">)</span>
-This<span class="w"> </span>generally<span class="w"> </span>indicates<span class="w"> </span>a<span class="w"> </span>trusted<span class="w"> </span>publisher
-configuration<span class="w"> </span>error,<span class="w"> </span>but<span class="w"> </span>could
-also<span class="w"> </span>indicate<span class="w"> </span>an<span class="w"> </span>internal<span class="w"> </span>error<span class="w"> </span>on<span class="w"> </span>GitHub<span class="w"> </span>or<span class="w"> </span>PyPI<span class="err">&#39;</span>s<span class="w"> </span>part.
-
-The<span class="w"> </span>claims<span class="w"> </span>rendered<span class="w"> </span>below<span class="w"> </span>are<span class="w"> </span><span class="k">for</span><span class="w"> </span>debugging<span class="w"> </span>purposes<span class="w"> </span>only.
-You<span class="w"> </span>should<span class="w"> </span>not
-use<span class="w"> </span>them<span class="w"> </span>to<span class="w"> </span>configure<span class="w"> </span>a<span class="w"> </span>trusted<span class="w"> </span>publisher<span class="w"> </span>unless<span class="w"> </span>they
-already<span class="w"> </span>match<span class="w"> </span>your<span class="w"> </span>expectations.
-</pre></div>
-</div>
-<p>Please register your repository. The ‘release.yml’ flow is
-publishing from the ‘release’ environment. Once you have
-registered your new repo it should all work.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -521,15 +629,32 @@ registered your new repo it should all work.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-environment"><strong>Set Up Environment</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-pre-commit-hooks"><strong>Configure Pre-commit Hooks</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-project-info"><strong>Update Project Info</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-problem">A Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#features">Features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-setup">Basic Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sending-data">Sending Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-data">Retrieving Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-with-data">Computing with Data</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development-commands">Development Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference">API Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#client"><code class="docutils literal notranslate"><span class="pre">Client</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#init-client-fl-flightclient"><code class="docutils literal notranslate"><span class="pre">__init__(client:</span> <span class="pre">fl.FlightClient)</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#write-command-str-data-dict-str-np-ndarray"><code class="docutils literal notranslate"><span class="pre">write(command:</span> <span class="pre">str,</span> <span class="pre">data:</span> <span class="pre">Dict[str,</span> <span class="pre">np.ndarray])</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get-command-str-pa-table"><code class="docutils literal notranslate"><span class="pre">get(command:</span> <span class="pre">str)</span> <span class="pre">-&gt;</span> <span class="pre">pa.Table</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-command-str-data-dict-str-np-ndarray-dict-str-np-ndarray"><code class="docutils literal notranslate"><span class="pre">compute(command:</span> <span class="pre">str,</span> <span class="pre">data:</span> <span class="pre">Dict[str,</span> <span class="pre">np.ndarray])</span> <span class="pre">-&gt;</span> <span class="pre">Dict[str,</span> <span class="pre">np.ndarray]</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-handling">Error Handling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-environment"><strong>Set Up Environment</strong></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contributing">Contributing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trusted-publishing-failure">Trusted publishing failure</a></li>
 </ul>
   </nav></div>
 

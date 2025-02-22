@@ -67,7 +67,7 @@ end_of_record
 SF:src/np/flight/numpy_server.py
 DA:1,1
 DA:2,1
-DA:4,1
+DA:3,1
 DA:5,1
 DA:6,1
 DA:8,1
@@ -118,9 +118,9 @@ FN:46,69,Server.do_put
 FNDA:1,Server.do_put
 FN:71,101,Server.do_get
 FNDA:1,Server.do_get
-FN:104,115,Server.start
+FN:104,114,Server.start
 FNDA:0,Server.start
-FN:118,118,Server.f
+FN:117,117,Server.f
 FNDA:0,Server.f
 FNF:7
 FNH:5

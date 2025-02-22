@@ -379,7 +379,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-setup">Basic Setup</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sending-data">Sending Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-data">Retrieving Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-with-data">Computing with Data</a></li>
 </ul>
@@ -454,26 +453,37 @@ the calcutation based on a dictionary of numpy arrays.</p>
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">#</a></h2>
 <section id="basic-setup">
 <h3>Basic Setup<a class="headerlink" href="#basic-setup" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">np.flight</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
+<p>We introduce the Baseclass ‘Server’:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">np.flight</span><span class="w"> </span><span class="kn">import</span> <span class="n">Server</span>
 
-<span class="c1"># Initialize the Flight client</span>
-<span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="s1">&#39;grpc://localhost:8815&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-<span class="o">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">TestServer</span><span class="p">(</span><span class="n">Server</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrices</span><span class="p">):</span>
+<span class="gp">... </span>         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">matrices</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="gp">... </span>         <span class="c1"># Simple implementation for testing - just return the input</span>
+<span class="gp">... </span>         <span class="k">return</span> <span class="p">{</span><span class="n">key</span> <span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">matrices</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</pre></div>
+</div>
+<p>All complexity is hidden in the class ‘Server’ which is itself a child
+of the pyarrrow’s FlightServerBase class. It is enough to implement
+the method ‘f’ which is expecting a dictionary of numpy arrays. It will
+also return a dictionary of numpy arrays.</p>
+<p>The server can be started locally with</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">server</span> <span class="o">=</span> <span class="n">TestServer</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">5555</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>While the server is running we can use a client for computations</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">np.flight</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">Client</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="s2">&quot;grpc://127.0.0.1:5555&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">output</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">command</span><span class="o">=</span><span class="s2">&quot;compute&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])})</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s2">&quot;input&quot;</span><span class="p">])</span>
+<span class="go">[2 4 6]</span>
 
 </pre></div>
 </div>
-</section>
-<section id="sending-data">
-<h3>Sending Data<a class="headerlink" href="#sending-data" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prepare your NumPy arrays</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;values&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]),</span>
-    <span class="s1">&#39;labels&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">])</span>
-<span class="p">}</span>
-
-<span class="c1"># Send data to the server</span>
-<span class="n">client</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;store_data&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">server</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
 </pre></div>
 </div>
 </section>
@@ -643,7 +653,6 @@ uv<span class="w"> </span>add/remove<span class="w"> </span>requests<span class=
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#usage">Usage</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-setup">Basic Setup</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sending-data">Sending Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#retrieving-data">Retrieving Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-with-data">Computing with Data</a></li>
 </ul>

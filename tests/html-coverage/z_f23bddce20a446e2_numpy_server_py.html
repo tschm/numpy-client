@@ -57,7 +57,7 @@
             <span class="text">41 statements &nbsp;</span>
             <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">41<span class="text"> run</span></button>
             <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">0<span class="text"> missing</span></button>
-            <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">14<span class="text"> excluded</span></button>
+            <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">15<span class="text"> excluded</span></button>
         </h2>
         <p class="text">
             <a id="prevFileLink" class="nav" href="z_f23bddce20a446e2_numpy_client_py.html">&#xab; prev</a> &nbsp; &nbsp;
@@ -65,7 +65,7 @@
             <a id="nextFileLink" class="nav" href="z_dc44bb707c9901c3___init___py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.12">coverage.py v7.6.12</a>,
-            created at 2025-02-22 18:52 +0000
+            created at 2025-02-22 18:53 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -193,10 +193,11 @@
     <p class="exc show_exc"><span class="n"><a id="t111" href="#t111">111</a></span><span class="t"><span class="str">        """</span>&nbsp;</span><span class="r"></span></p>
     <p class="exc show_exc"><span class="n"><a id="t112" href="#t112">112</a></span><span class="t">        <span class="nam">server</span> <span class="op">=</span> <span class="nam">cls</span><span class="op">(</span><span class="nam">host</span><span class="op">=</span><span class="nam">host</span><span class="op">,</span> <span class="nam">port</span><span class="op">=</span><span class="nam">port</span><span class="op">,</span> <span class="nam">logger</span><span class="op">=</span><span class="nam">logger</span><span class="op">,</span> <span class="op">**</span><span class="nam">kwargs</span><span class="op">)</span>  <span class="com"># Instantiate the server.</span>&nbsp;</span><span class="r"></span></p>
     <p class="exc show_exc"><span class="n"><a id="t113" href="#t113">113</a></span><span class="t">        <span class="nam">server</span><span class="op">.</span><span class="nam">logger</span><span class="op">.</span><span class="nam">info</span><span class="op">(</span><span class="fst">f"</span><span class="fst">Starting </span><span class="op">{</span><span class="nam">cls</span><span class="op">}</span><span class="fst"> Flight server on port </span><span class="op">{</span><span class="nam">port</span><span class="op">}</span><span class="fst">...</span><span class="fst">"</span><span class="op">)</span>  <span class="com"># Log the server start.</span>&nbsp;</span><span class="r"></span></p>
-    <p class="exc show_exc"><span class="n"><a id="t114" href="#t114">114</a></span><span class="t">        <span class="nam">server</span><span class="op">.</span><span class="nam">serve</span><span class="op">(</span><span class="op">)</span>  <span class="com"># Start the server to handle incoming requests.</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t115" href="#t115">115</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="exc show_exc"><span class="n"><a id="t116" href="#t116">116</a></span><span class="t">    <span class="op">@</span><span class="nam">abstractmethod</span>&nbsp;</span><span class="r"></span></p>
-    <p class="exc show_exc"><span class="n"><a id="t117" href="#t117">117</a></span><span class="t">    <span class="key">def</span> <span class="nam">f</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">matrices</span><span class="op">:</span> <span class="nam">dict</span><span class="op">[</span><span class="nam">str</span><span class="op">,</span> <span class="nam">np</span><span class="op">.</span><span class="nam">ndarray</span><span class="op">]</span><span class="op">)</span> <span class="op">-></span> <span class="nam">dict</span><span class="op">[</span><span class="nam">str</span><span class="op">,</span> <span class="nam">np</span><span class="op">.</span><span class="nam">ndarray</span><span class="op">]</span><span class="op">:</span> <span class="op">...</span>  <span class="com"># pragma: no cover</span>&nbsp;</span><span class="r"></span></p>
+    <p class="exc show_exc"><span class="n"><a id="t114" href="#t114">114</a></span><span class="t">        <span class="com"># server.serve()  # Start the server to handle incoming requests.</span>&nbsp;</span><span class="r"></span></p>
+    <p class="exc show_exc"><span class="n"><a id="t115" href="#t115">115</a></span><span class="t">        <span class="key">return</span> <span class="nam">server</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t116" href="#t116">116</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="exc show_exc"><span class="n"><a id="t117" href="#t117">117</a></span><span class="t">    <span class="op">@</span><span class="nam">abstractmethod</span>&nbsp;</span><span class="r"></span></p>
+    <p class="exc show_exc"><span class="n"><a id="t118" href="#t118">118</a></span><span class="t">    <span class="key">def</span> <span class="nam">f</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">matrices</span><span class="op">:</span> <span class="nam">dict</span><span class="op">[</span><span class="nam">str</span><span class="op">,</span> <span class="nam">np</span><span class="op">.</span><span class="nam">ndarray</span><span class="op">]</span><span class="op">)</span> <span class="op">-></span> <span class="nam">dict</span><span class="op">[</span><span class="nam">str</span><span class="op">,</span> <span class="nam">np</span><span class="op">.</span><span class="nam">ndarray</span><span class="op">]</span><span class="op">:</span> <span class="op">...</span>  <span class="com"># pragma: no cover</span>&nbsp;</span><span class="r"></span></p>
 </main>
 <footer>
     <div class="content">
@@ -206,7 +207,7 @@
             <a class="nav" href="z_dc44bb707c9901c3___init___py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.12">coverage.py v7.6.12</a>,
-            created at 2025-02-22 18:52 +0000
+            created at 2025-02-22 18:53 +0000
         </p>
     </div>
 </footer>
